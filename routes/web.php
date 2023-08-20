@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,4 @@ Route::get('/login', [\App\Http\Controllers\LoginController::class, 'login'])->n
 
 Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
-Route::view('/products', 'products');
+Route::view('/products', 'products', ["products" => Product::all()]);
