@@ -23,3 +23,5 @@ Route::get('/login', [\App\Http\Controllers\LoginController::class, 'login'])->n
 Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
 Route::view('/products', 'products', ["products" => Product::all()]);
+
+Route::view('/products/table', 'components.product_table', ["products" => Product::all()]);
