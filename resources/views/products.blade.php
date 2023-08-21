@@ -66,6 +66,7 @@
         // create / edit
         $('form').submit(function(event) {
             event.preventDefault();
+            $('#submit-edit').prop('disabled', true);
 
             const formData = new FormData($(this)[0]);
             formData.append('_method', editorMode === 'create' ? 'POST' : 'PATCH');
@@ -83,9 +84,11 @@
                         $('#product-table').html(html);
                     });
                     resetForm();
+                    $('#submit-edit').prop('disabled', false);
                 },
                 error: function() {
                     alert("Failed to apply changes");
+                    $('#submit-edit').prop('disabled', false);
                 }
             });
         });
@@ -93,6 +96,7 @@
         // delete
         $(document).on('click', '.delete-product', function() {
             const productId = $(this).data('product-id');
+            $('.delete-product').prop('disabled', true);
 
             $.ajax({
                 url: '/api/product/' + productId,
@@ -104,9 +108,11 @@
                     $.get('/products/table', function(html) {
                         $('#product-table').html(html);
                     });
+                    $('.delete-product').prop('disabled', false);
                 },
                 error: function() {
                     alert("Failed to delete data");
+                    $('.delete-product').prop('disabled', false);
                 }
             });
         });
